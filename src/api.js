@@ -15,3 +15,26 @@ export async function login(username, password) {
     return json.token;
 
 }
+
+export async function getProducts () {
+    const token = localStorage.getItem ("token")
+
+    const response = await fetch (`${API_URL}/products` , {
+            method: "GET",
+            headers: {"Authorization": `Bearer ${token}`}
+        })
+
+    const json = await response.json()
+    return json.products
+}
+
+export async function getProductsById (id) {
+    const token = localStorage.getItem("token")
+
+    const response = await fetch (`${API_URL}/products/${id}` , {
+        method: "GET",
+        authorization : {authorization: `Bearer ${token}`}
+    }) 
+    const json = await response.json();
+    return json
+} 
